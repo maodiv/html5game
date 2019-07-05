@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <title>统计表格</title>
+    <style>
+        body{margin:0px;padding:0px;}
+    </style>
+</head>
+<body>
+<style>
+    .header{
+        background-color: black;
+        height: 60px;
+        width:100%;
+        position:relative;
+        display:flex;
+        align-items:center;
+    }
+    .header h1{
+        color:white;
+        display:inline-block;
+        margin:0px 10px;
+        padding:0px;
+    }
+    .middle{
+        width:100%;
+        position:absolute;
+        top:60px;
+        bottom:0px;
+    }
+    .middle_left{
+        list-style-type: none;
+        background-color: #f1f1f1;
+        border-right: 1px solid #ddd;
+        height:100%;
+        width: 10%;
+        padding: 0px;
+        margin: 0px;
+        float: left;
+        overflow:auto;
+    }
+    .middle_left li{
+        border-bottom:1px solid #dedede;
+    }
+    .middle_left li a{
+        display:block;
+        padding: 6px 8px;
+        text-decoration:none;
+        color:black;
+    }
+    .middle_left li a:hover{
+        background-color: #9a9a9a !important;
+        color:white !important;
+    }
+    .middle_right{
+        height:100%;
+        padding-left: 20px;
+        overflow:auto;
+        position:relative;
+    }
+
+    .chart{
+        width: 95%;height:85%;
+        margin:40px auto;
+    }
+
+    .topbar{
+        margin:10px 10px;
+        align-items: center;
+        padding: 0px 300px;
+        display:none;
+    }
+    .baritem{
+        display:inline-block;
+        padding:5px;
+        margin: 0px auto;
+    }
+    .baritem span{
+        margin:0px 10px;
+    }
+    .topbar .btn{
+        width: 80px;
+        height: 29px;
+        font-size: 14px;
+        margin: 0px 20px;
+    }
+
+    .selection{
+        display:inline-block;
+        position:relative;
+    }
+    .selection:hover .options{
+        display:block;
+    }
+    .selection:hover .selection-btn-arrow{
+        top: 4px;
+        border-color: transparent transparent #949494 transparent;
+    }
+    .selection .selection-btn{
+        position:relative;
+        display:inline-block;
+        background-color:#f1f1f1;
+        cursor: pointer;
+        border:1px solid #d2d1d1;
+        text-align:center;
+        font-size: 15px;
+        padding: 3px 6px;
+        vertical-align:middle;
+    }
+    .selection .selection-btn:focus{
+        outline: none;
+    }
+    .selection .selection-btn p{
+        float:left;
+        margin:0px;
+        padding:0px;
+    }
+    .selection .selection-btn-arrow{
+        float:right;
+        display: inline;
+        position: relative;
+        content: "";
+        top: 8px;
+        margin: 0px 0px 0px 10px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #949494 transparent transparent transparent;
+    }
+    .selection .options{
+        display:none;
+        position:absolute;
+        background-color:#f9f9f9;
+        box-shadow: 3px 3px 9px 5px rgba(0,0,0,0.2);
+        min-width:170px;
+        z-index:1000;
+        max-height: 450px;
+        overflow: auto;
+    }
+    .selection .options a{
+        cursor:pointer;
+        display:block;
+        margin:0px;
+        padding:4px 6px;
+        font-size: 15px;
+    }
+    .selection .options a:not(:last-child){
+        border-bottom:1px solid #d2d1d1;
+    }
+    .selection .options a:hover{
+        background-color:#848181 !important;
+        color:#f1f1f1 !important;
+    }
+    .selection .options a:active{
+        background-color:black !important;
+    }
+
+    /*  修改日历控件类型 */
+    ::-webkit-datetime-edit { padding:0px; height:24px; background-color:#fff; align-itmes:center;}  /*控制编辑区域的*/
+    ::-webkit-datetime-edit-fields-wrapper { background-color:#fff; margin:3px 0px; font-size:15px;}    /*控制年月日这个区域的*/
+    ::-webkit-datetime-edit-text { color: #333;}  /*这是控制年月日之间的斜线或短横线的*/
+    ::-webkit-datetime-edit-year-field { color: #333; }    /*控制年文字, 如2013四个字母占据的那片地方*/
+    ::-webkit-datetime-edit-month-field { color: #333; }    /*控制月份*/
+    ::-webkit-datetime-edit-day-field { color: #333; }    /*控制具体日子*/
+    ::-webkit-inner-spin-button { display:none; }    /*这是控制上下小箭头的*/
+    ::-webkit-calendar-picker-indicator {      /*这是控制下拉小箭头的*/
+        border: 1px solid #ccc;
+        background-color: #eee;
+        background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
+        color: #666;
+    }
+    ::-webkit-clear-button {    /*控制清除按钮*/
+        margin-right:2px;
+    }
+
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    ::-webkit-scrollbar
+    {
+        width: 8px;
+        height: 16px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+</style>
+
+<div class="header">
+    <h1>埋点系统</h1>
+</div>
+
+<div class="middle">
+    <ul class="middle_left">
+        <li><a href="#nav1" data-types="total">按行为统计</a></li>
+        <li><a href="#nav2" data-types="date">按时间统计</a></li>
+    </ul>
+    <div class="middle_right">
+            <div id="topbar" class="topbar">
+                <form id="dataForm">
+                    <div class="baritem">
+                        <span>统计类型</span>
+                        <div id="behaviorTypes"  class="selection">
+                            <input type="hidden"  name="behaviorType" id="behaviorTypeInput"/>
+                            <div class="selection-btn"  onclick="behaviorTypeSelect()">
+                                <p>请选择行为</p>
+                                <div class="selection-btn-arrow"></div>
+                            </div>
+                            <div class="options"></div>
+                        </div>
+                    </div>
+                    <div class="baritem">
+                        <span>统计时间</span>
+                        <input type="date" name="startDate">-<input type="date" name="endDate">
+                    </div>
+                    <button type="button" onclick="dataDailyStatistics()" class="btn">查询</button>
+                </form>
+            </div>
+            <div id="main" class="chart"></div>
+        <script src="./js/jquery-3.4.1.min.js"></script>
+        <script src="./js/echarts.js"></script>
+    </div>
+</div>
+
+
+<script>
+    var dataZoom = [
+        {
+            type: 'inside',
+            start: 0,
+            end: 100
+        }, {
+            start: 0,
+            end: 10,
+            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+            handleSize: '80%',
+            handleStyle: {
+                color: '#fff',
+                shadowBlur: 3,
+                shadowColor: 'rgba(0, 0, 0, 0.6)',
+                shadowOffsetX: 2,
+                shadowOffsetY: 2
+            }
+        }
+    ];
+
+    var myChart;
+
+    //左侧导航点击事件
+    $(".middle_left li").bind("click",function(){
+        $(this).children("a").first().css({"background-color": "#353535","color":"white"});
+        $(this).siblings().children("a").first().css({"background-color": "#f1f1f1","color":"black"});
+        var type = $(this).children("a").first().data("types");
+        $("#topbar").css("display","none");
+        if("total" == type) {
+            if(myChart != null && myChart != "" && myChart != undefined) {
+                myChart.dispose();
+            }
+            dataStatistics();
+        }else if("date" == type) {
+            if(myChart != null && myChart != "" && myChart != undefined) {
+                myChart.dispose();
+            }
+            $("#topbar").css("display","flex");
+            $(".topbar .btn").trigger("click");
+        }
+    });
+
+    //默认选中第一个
+    $(".middle_left").children(":first").trigger("click");
+
+    //行为类型下拉框点击事件
+    $("#behaviorTypes .options").mouseleave(function(){
+        $("#behaviorTypes .options").css({"display": "none"});
+
+    });
+    function behaviorTypeSelect() {
+        if($("#behaviorTypes .options").css("display") == "block") {
+            $("#behaviorTypes .options").css({"display": "none"});
+        }else {
+            $("#behaviorTypes .options").css({"display": "block"});
+
+            $(".select_btn").find(":last-child").css({
+                "top": "-12px"
+                ,"border-color": "transparent transparent #949494 transparent"
+            });
+
+        }
+    }
+
+    behaviorTypeRender();
+
+    //行为类型下拉框
+    function behaviorTypeRender() {
+        $.get('/getEnums', function (data) {
+            var mstr = JSON.stringify(data);
+            var jsonstr = JSON.parse(mstr);
+            var i = 0;
+            for(var key in data){
+                key = key;
+/*                if(i == 0) {
+                    $(".selection").data("value", value);
+                    $(".selection").data("text", text);
+                }*/
+                var option = '<option value="'+key+'">'+data[key]+'</option>';
+                $("#behaviorType").append(option);
+
+                option = '<a data-value="'+key+'">'+data[key]+'</a>';
+                $("#behaviorTypes .options").append(option);
+            }
+            $("#behaviorTypes .options a").on("click",function(){
+                $(this).css({"background-color": "#353535","color":"white"});
+                $(this).siblings().css({"background-color": "#f1f1f1","color":"black"});
+                var value = $(this).data("value");
+                var text = $(this).text()
+                $(".selection").data("value", value);
+                $(".selection").data("text", text);
+                $("#behaviorTypeInput").val(value);
+                $("#behaviorTypes .options").css({"display": "none"});
+                $(".select_btn").text(text);
+                console.log($("#behaviorTypeInput").val());
+                i++;
+            });
+            //默认选中第一个
+            $("#behaviorTypes .options").children(":first").trigger("click");
+        })
+    }
+
+    //数据统计（按类型）
+    function dataStatistics() {
+        var option = {
+            title: {
+                text: '数据统计（按行为）'
+            },
+            legend: {
+                selected:{},
+                selectedMode:'single'
+            },
+            tooltip: {},
+            dataset: {
+                dimensions: [],
+                source: []
+            },
+            xAxis: {
+                type: 'category'
+                //, axisLabel: {rotate: 20}
+            },
+            yAxis: [{
+                type: 'value'
+            }],
+            dataZoom: dataZoom,
+            series: []
+        };
+        option.dataset.dimensions.push("product");
+
+        $.post('/behaviorList', function (data) {
+            if (data.code != '200') {
+                alert(data.message);
+                return;
+            }
+
+            for (var i in data.data) {
+                var ele = data.data[i];
+                var source = {};
+                Object.keys(ele).forEach(function (key) {
+                    if (key == 'behaviorName') {
+                        source['product'] = ele[key];
+                    }else if(key == 'behaviorType') {
+                    }else {
+                        source[key] = ele[key];
+                        if (option.dataset.dimensions.indexOf(key) < 0) {
+                            option.dataset.dimensions.push(key);
+                            var seriesEle = {
+                                type: 'bar', label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                }
+                            };
+                            option.series.push(seriesEle);
+                            if(Object.keys(option.legend.selected).length > 0) {
+                                option.legend.selected[key] = false;
+                            }else {
+                                option.legend.selected[key] = true;
+                            }
+                        }
+                    }
+                });
+                option.dataset.source.push(source);
+            }
+
+            // 基于准备好的dom，初始化echarts实例
+            if(myChart != null && myChart != "" && myChart != undefined) {
+                myChart.dispose();
+            }
+            myChart = echarts.init(document.getElementById('main'));
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+    }
+
+    //数据统计（按日期）
+    function dataDailyStatistics() {
+        var option = {
+            title: {
+                text: ''
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                selected:{},
+                selectedMode:'single',
+                data: [],
+            },
+            grid: {
+                containLabel: true,
+                /*                left: '3%',
+                                right: '10%',
+                                bottom: '3%',
+                                x2: 100*/
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: []
+            },
+            yAxis: {
+                type: 'value'
+            },
+            dataZoom: dataZoom,
+            series: []
+        };
+        option.title.text = $(".selection").data("text");
+
+        $.post('/behaviorDailyList', $("#dataForm").serialize(), function (data) {
+            if (data == null || data.code != '200') {
+                alert(data.message);
+                return;
+            }
+            var legendMap = {};
+            var legendDataArr = [];
+            var xAxisDataArr = [];
+            var seriesArr = [];
+            for (var i in data.data) {
+                var ele = data.data[i];
+                Object.keys(ele).forEach(function (key) {
+                    if (key == 'recordDate') {
+                        xAxisDataArr.push(ele[key]);
+                    } else if (key == 'behaviorName') {
+
+                    } else if (key == 'behaviorType') {
+                    } else {
+                        if (legendMap[key] == null) {
+                            legendMap[key] = [];
+                        }
+                        legendMap[key].push(ele[key]);
+                    }
+                });
+            }
+            Object.keys(legendMap).forEach(function (key) {
+                var seriesEle = {};
+                seriesEle["name"] = key;
+                seriesEle["type"] = 'line';
+                seriesEle["stack"] = '总量'
+                seriesEle["data"] = legendMap[key];
+                seriesArr.push(seriesEle);
+                legendDataArr.push(key);
+                if(Object.keys(option.legend.selected).length > 0) {
+                    option.legend.selected[key] = false;
+                }else {
+                    option.legend.selected[key] = true;
+                }
+            });
+            option.legend.data = legendDataArr;
+            option.xAxis.data = xAxisDataArr;
+            option.series = seriesArr;
+            // 基于准备好的dom，初始化echarts实例
+            if(myChart != null && myChart != "" && myChart != undefined) {
+                myChart.dispose();
+            }
+            myChart = echarts.init(document.getElementById('main'));
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+    }
+
+    function bbsDataInfo() {
+        $.post('/bbsDataInfo', function (data) {
+            if (data.code != '200') {
+                alert(data.message);
+                return;
+            }
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('main_tap'));
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                title: {
+                    text: '埋点统计',
+                },
+                toolbox: {
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                legend: {
+                    data: data.data.yData
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: data.data.xData
+                },
+                yAxis: {
+                    type: 'value',
+                    // boundaryGap: [0, '100%']
+                },
+                dataZoom: [{
+                    type: 'inside',
+                    start: 0,
+                    end: 100
+                }, {
+                    start: 0,
+                    end: 10,
+                    handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                    handleSize: '80%',
+                    handleStyle: {
+                        color: '#fff',
+                        shadowBlur: 3,
+                        shadowColor: 'rgba(0, 0, 0, 0.6)',
+                        shadowOffsetX: 2,
+                        shadowOffsetY: 2
+                    }
+                }],
+                series: [
+                    {
+                        name: data.data.yData[0],
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            color: 'rgb(255, 70, 131)'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 158, 68)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 70, 131)'
+                            }])
+                        },
+                        data: data.data.yClickSum
+                    },
+                    {
+                        name: data.data.yData[1],
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            color: 'rgb(73,139,255)'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(138,255,214)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(73,139,255)'
+                            }])
+                        },
+                        data: data.data.yUserCount
+                    },
+                    {
+                        name: data.data.yData[2],
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        itemStyle: {
+                            color: 'rgb(249,90,255)'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255,159,197)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(249,90,255)'
+                            }])
+                        },
+                        data: data.data.yDataAg
+                    },
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option);
+        })
+    }
+
+</script>
+
+</body>
+</html>

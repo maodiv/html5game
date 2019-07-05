@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<head>
+<title></title>
+
+	<style>
+		body{
+			margin:0px;
+			padding:0px;
+		}
+		
+		/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+		::-webkit-scrollbar
+		{
+			width: 8px;
+			height: 16px;
+			background-color: #F5F5F5;
+		}
+
+		/*定义滚动条轨道 内阴影+圆角*/
+		::-webkit-scrollbar-track
+		{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F5F5F5;
+		}
+
+		/*定义滑块 内阴影+圆角*/
+		::-webkit-scrollbar-thumb
+		{
+			border-radius: 10px;
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			background-color: #555;
+		}
+	</style>
+
+</head>
+<body>
+	<script>
+		navigator.geolocation.getCurrentPosition(showPosition);
+		function showPosition(position)
+		{
+			console.log("纬度: " + position.coords.latitude);
+			console.log("经度: " + position.coords.longitude);
+		}
+	</script>
+
+	<style>
+		.header{
+			background-color: black;
+			height: 80px;
+			width:100%;
+			position:relative;
+			display:flex;
+			align-items:center;
+		}
+		.header h1{
+			color:white;
+			display:inline-block;
+			margin:0px 10px;
+			padding:0px;
+		}
+	
+		.middle{
+			width:100%;
+			position:absolute;
+			top:80px;
+			bottom:0px;
+		}
+	
+		.middle_left{
+			list-style-type: none;
+			background-color: #f1f1f1;
+			border-right: 1px solid #ddd;
+			height:100%;
+			width: 10%;
+			padding: 0px;
+			margin: 0px;
+			float: left;
+			overflow:auto;
+		}
+		.middle_left li a{
+			display:block;
+			padding: 6px 8px;
+			text-decoration:none;
+			color:black;
+		}
+		.middle_left li a:focus{
+			background-color: red;
+		}
+		.middle_left li a:hover{
+			background-color: #555;
+			color:white;
+		}
+	
+		.middle_right{
+			height:100%;
+			padding-left: 20px;
+			overflow:auto;
+		}
+	</style>
+
+	<div class="header">
+		<h1>系统</h1>
+	</div>
+	
+<div class="middle">
+	
+
+	
+	<ul class="middle_left">
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>	
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>	
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>	
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>	
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+		<li><a href="#nav1">导航一</a></li>
+		<li><a href="#nav2">导航二</a></li>
+		<li><a href="#nav3">导航三</a></li>
+		<li><a href="#nav4">导航四</a></li>
+		<li><a href="#nav5">导航五</a></li>		
+	</ul>
+	<div class="middle_right">
+	  <h2>Fixed Selection</h2>
+	  
+	  
+	  <style>
+		.selection{
+			display:inline-block;
+			position:relative;
+			
+		}
+		.selection:hover .options{
+			display:block;
+		}
+		.selection:hover .selection-btn-arrow{
+			top: 4px;
+			border-color: transparent transparent #949494 transparent;
+		}
+		.selection .selection-btn{
+			position:relative;
+			display:inline-block;
+			background-color:#f1f1f1;
+			cursor: pointer;
+			border:1px solid #d2d1d1;
+			text-align:center;
+			font-size: 15px;
+			padding: 3px 6px;
+			vertical-align: middle;
+		}
+		.selection .selection-btn:focus{
+			outline: none;
+		}
+		.selection .selection-btn p{
+			float:left;
+			margin:0px;
+			padding:0px;
+		}
+		.selection .selection-btn-arrow{
+			float:right;
+			display: inline;
+			position: relative;
+			content: "";
+			top: 8px;
+			margin: 0px 0px 0px 10px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: #949494 transparent transparent transparent;
+		}
+		.selection .options{
+			display:none;
+			position:absolute;
+			background-color:#f9f9f9;
+			box-shadow: 3px 3px 9px 5px rgba(0,0,0,0.2);
+			min-width:170px;
+			z-index:1000;
+			max-height: 450px;
+			overflow: auto;
+		}
+		.selection .options a{
+			cursor:pointer;
+			display:block;
+			margin:0px;
+			padding:4px 6px;
+			font-size: 15px;
+		}
+		.selection .options a:not(:last-child){
+			border-bottom:1px solid #d2d1d1;
+		}
+		.selection .options a:hover{
+			background-color:#848181;
+			color:#f1f1f1;
+		}
+		.selection .options a:active{
+			background-color:black;
+		}
+	  </style>
+	  <div class="selection">
+		<div class="selection-btn">
+			<p>请选择行为</p>
+		<!-- -->	<div class="selection-btn-arrow"></div>
+		</div>
+		<!-- -->
+		<div class="options">
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+			<a>option 1</a>
+			<a>option 2option</a>
+			<a>option 3</a>
+		</div>
+		
+	  </div>
+	  
+    <style>
+        .box {
+            position: relative;
+            display: block;
+            float: left;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #18c250;
+            border-radius: 3px;
+			margin:3px 0px 0px 0px;
+        }
+
+        input[type=checkbox]:checked + label .box:before {
+            content: "";
+            position: absolute;
+			top: 65%;
+			left: 0%;
+			width: 50%;
+			height: .1rem;
+            background-color: #18c250;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+        }
+
+        input[type=checkbox]:checked + label .box:after {
+            content: "";
+            position: absolute;
+			top: 60%;
+			left: 30%;
+			width: 80%;
+			height: .1rem;
+            background-color: #18c250;
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+
+        .info {
+            float: left;
+            user-select: none;
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        input[type=checkbox]{
+            display: none;
+        }
+
+    </style>
+	<div style="margin-top:30px;">
+		<input id="input" type="checkbox">
+		<label for="input">
+			<span class="box"></span>
+			<span class="info">已阅读协议书</span>
+		</label>
+	</div>
+	
+	
+	<style>
+		.remain{
+			position:relative;
+			display:inline-block;
+		}
+		.remain_content{
+			visibility:hidden;
+		/*	display:none;*/
+			background-color:#f7f7f7;
+			color:black;
+			border-radius:5px;
+			padding:5px;
+			text-align:center;
+			width:220px;
+			position:absolute;
+			bottom:25px;
+			box-shadow:4px 4px 8px 4px #9e9e9e;
+			
+			opacity:0;
+			transition:opacity 1s;
+		}
+		.remain_content:after{
+			content:"";
+			display:inline;
+			position:absolute;
+			left:5%;
+			top:100%;
+			border-width: 5px;
+			border-style: solid;
+			border-color:#f7f7f7 transparent transparent transparent;
+		}
+		.remain:hover .remain_content{
+			visibility:visible;
+		/*	display:inline-block;*/
+			opacity:1;
+		}
+	</style>
+	<div style="margin-top:50px;"></div>
+	<div class="remain">鼠标移动
+		<span class="remain_content">提示内容</span>
+	</div>
+	
+	<style>
+		/*  修改日历控件类型 */
+		::-webkit-datetime-edit { padding:0px; height:28px; background-color:#fff; align-itmes:center;}  /*控制编辑区域的*/
+		::-webkit-datetime-edit-fields-wrapper { background-color:#fff; margin:5px 0px; font-size:15px;}    /*控制年月日这个区域的*/
+		::-webkit-datetime-edit-text { color: #333;}  /*这是控制年月日之间的斜线或短横线的*/
+		::-webkit-datetime-edit-year-field { color: #333; }    /*控制年文字, 如2013四个字母占据的那片地方*/   
+		::-webkit-datetime-edit-month-field { color: #333; }    /*控制月份*/
+		::-webkit-datetime-edit-day-field { color: #333; }    /*控制具体日子*/
+		::-webkit-inner-spin-button { display:none; }    /*这是控制上下小箭头的*/
+		::-webkit-calendar-picker-indicator {      /*这是控制下拉小箭头的*/
+		
+			border: 1px solid #ccc;
+			background-color: #eee;
+			background-image: -webkit-linear-gradient(top, #f0f0f0, #e6e6e6);
+			color: #666;
+			
+		}
+		::-webkit-clear-button {    /*控制清除按钮*/
+			margin-right:2px;
+		}
+	</style>
+	<div style="margin-top:50px;"></div>
+	<input type="date" name="endDate">
+	
+	<style>
+		.imgs-div{
+			display:inline-block;
+			border:1px solid #f1f1f1;
+		}
+		.imgs-div:hover{
+			border:1px solid black;
+		}
+		.imgs-a{}
+		.imgs-img{
+			width:300px;
+			height:200px;
+			
+		}
+		.imgs-text{
+			text-align:center;
+		}
+	</style>
+	<div style="margin-top:50px;"></div>
+	<div class="imgs-div">
+		<a class="imgs-a" href="https://static.runoob.com/images/demo/demo4.jpg" target="_blank">
+			<img class="imgs-img" src="https://static.runoob.com/images/demo/demo4.jpg"/>
+		</a>
+		<div class="imgs-text">图片文本描述</div>
+	</div>
+	
+
+	  
+	  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+	  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+	  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+	  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+	  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+	  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+	  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+	  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+	  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
+	  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
+	  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	  <p>Some text..</p>
+	</div>
+
+</div>
+
+	
+
+
+</body>
+</html>
